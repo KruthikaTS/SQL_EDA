@@ -70,11 +70,10 @@ GROUP BY p.patient_id, pi.identifier, pn.given_name, pn.family_name, per.gender,
 ORDER BY p.patient_id;
 
 ---
-### 🧠 ER Relationships Summary
+### ER Relationships Summary
 Person → Patient → Visit → Encounter → Obs, with side tables for name, identifiers & attributes.
 
 ### 🛠 Create SQL View for Final Patient Report
-```sql
 CREATE OR REPLACE VIEW patient_profile_report AS
 SELECT p.patient_id,
        pi.identifier AS openmrs_id,
@@ -92,14 +91,11 @@ LEFT JOIN person_attribute pa ON per.person_id = pa.person_id
 LEFT JOIN person_attribute_type pat ON pa.person_attribute_type_id = pat.person_attribute_type_id
 GROUP BY p.patient_id, pi.identifier, pn.given_name, pn.family_name, per.gender, per.birthdate
 ORDER BY p.patient_id;
-```
 
-### 📦 Export Final Report to CSV
-```sql
+### Export Final Report to CSV
 SELECT * FROM patient_profile_report
 INTO OUTFILE '/var/lib/mysql-files/patient_profile_report.csv'
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '
 ';
-```
