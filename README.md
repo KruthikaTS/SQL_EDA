@@ -78,8 +78,3 @@ patient_id | openmrs_id | first_name | last_name | gender | birthdate | caste | 
 
 ---
 
-## How to Use
-
-Clone repository and run SQL file inside MySQL Workbench / PostgreSQL / DBeaver environment to reproduce results.
-
----
